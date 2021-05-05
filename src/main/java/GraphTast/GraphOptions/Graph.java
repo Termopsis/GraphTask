@@ -3,29 +3,25 @@ package GraphTast.GraphOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Graph implements I_Graph {
+public class Graph{
 
-    public HashMap<Integer,Integer> map;
-    public ArrayList<Item> listOfGraphs;
+    private HashMap<Integer,Integer> map;
+    private ArrayList<Item> listOfGraphs;
 
-    @Override
     public void setValueOfNumbers(HashMap<Integer,Integer> map) {
-        //Карта соответсвий значений и сумм требуемых значений
+        //Map of values and sums of required values
         this.map = map;
     }
 
-    @Override
     public void setGraphLinks(ArrayList<Item> listOfGraphs) {
-        //Наш список связей
+        //Our link list
         this.listOfGraphs = listOfGraphs;
     }
 
-    @Override
     public HashMap<Integer,Integer> getValueOfNumbers() {
         return map;
     }
 
-    @Override
     public ArrayList<Item> getGraphLinks() {
         return listOfGraphs;
     }

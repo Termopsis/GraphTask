@@ -1,7 +1,6 @@
 package GraphTast;
 
 import GraphTast.GraphOptions.Graph;
-import GraphTast.GraphOptions.I_Graph;
 import GraphTast.GraphOptions.Item;
 import GraphTast.Options.A_Var;
 import GraphTast.Options.Var_1;
@@ -13,12 +12,12 @@ import java.util.HashMap;
 
 public class Test {
 
-    Permutation permutation;
-    I_Graph i_graph;
+    private Permutation permutation;
+    private Graph graph;
 
     public static void main(String[] args) {
 
-        //Вариант графа
+        //Graph variant
         System.out.println("First one ------------------------------");
         start(new Var_1());
 
@@ -28,7 +27,7 @@ public class Test {
 
     static void start(A_Var varOfGraphs){
 
-        //Задача по обработке графа и поска в нем соответствий
+        //The task of processing a graph and searching for matches in it
         Test test = new Test();
 
         //Заполним входные данные
@@ -37,8 +36,8 @@ public class Test {
         test.setPermutation(permutation);
 
         Graph graph = new Graph();
-        graph.setValueOfNumbers(varOfGraphs.map);
-        graph.setGraphLinks(varOfGraphs.listOfGraphs);
+        graph.setValueOfNumbers(varOfGraphs.mapOfValues);
+        graph.setGraphLinks(varOfGraphs.arrayList);
         test.setI_graph(graph);
 
         test.checkAllPermutation();
@@ -46,9 +45,7 @@ public class Test {
 
     public void checkAllPermutation() {
         for (int i = 0; i < permutation.getPermutationListOfDigits().size(); i++) {
-            if (check(permutation.getPermutationListOfDigits().get(i), i_graph.getGraphLinks(), i_graph.getValueOfNumbers())) {
-                //break;
-            }
+            check(permutation.getPermutationListOfDigits().get(i), graph.getGraphLinks(), graph.getValueOfNumbers());
         }
     }
 
@@ -56,28 +53,25 @@ public class Test {
         this.permutation = permutation;
     }
 
-    public void setI_graph(I_Graph i_graph) {
-        this.i_graph = i_graph;
+    public void setI_graph(Graph graph) {
+        this.graph = graph;
     }
 
-    public boolean check(int[] arr, ArrayList<Item> listOfGraphs, HashMap<Integer,Integer> map){
+    public void check(int[] arr, ArrayList<Item> listOfGraphs, HashMap<Integer,Integer> map){
 
         for (int i = 0; i < arr.length; i++) {
-            //Заполнили значение элемента взяв число из массива где только что выставили новую комбинацию
+            //Filled in the value of the element by taking the number from the array where you just put a new combination
             listOfGraphs.get(i).setValue(arr[i]);
 
-            //По новой комбинации так же берем из карты итоговое число
+            //For the new combination, we also take the total number from the card
             listOfGraphs.get(i).setTargetValue(map.get(arr[i]));
         }
 
-        //Проверяем получится при данной комбинации нужные нам числа
+        //We check whether the numbers we need will work out with the given combination
         if (countTargetValue(listOfGraphs)) {
             System.out.println("The final set of numbers: " + Arrays.toString(arr));
-
-            //Не будем прерывать цикл. Пусть ищет все возможные комбинации
-            //return true;
+            //Let's not interrupt the cycle. Let's look for all combinations of combinations
         }
-        return false;
     }
 
     public boolean countTargetValue(ArrayList<Item> listOfGraphs){
