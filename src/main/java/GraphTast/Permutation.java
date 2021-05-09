@@ -16,13 +16,14 @@ public class Permutation {
         if (arrOfNumbers.length != 0) {
             fillPermutationOptions(arrOfNumbers, arrOfNumbers.length);
         }else
-            System.out.println("Массив чисел пуст!");
+            System.out.println("The array of numbers is empty!");
     }
 
     //finds permutation using Heap Algorithm
     private void fillPermutationOptions(int array[], int size) {
         // if size becomes 1, it prints the obtained permutation
         if (size == 1)
+
             this.permutationListOfDigits.add(array.clone());
         for (int i = 0; i < size; i++) {
             fillPermutationOptions(array, size - 1);
